@@ -1,0 +1,19 @@
+*{  
+    margin: 0;
+    font-family: 'Varela', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+ 
+
+ 
+body::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background : linear-gradient(rgb(205, 138, 250),rgb(243, 173, 243));
+
+}

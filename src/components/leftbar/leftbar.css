@@ -1,0 +1,118 @@
+.leftbar{
+    flex: 3;
+    position: sticky;
+    height: 20rem;
+    top: 4.3rem;
+    max-width: 20rem;
+}
+.leftbarWrapper{
+    padding: 1.3rem;
+    display: flex;
+    flex-flow: column;
+
+}
+.leftbarWrapper li{
+    list-style-type: none;
+}
+
+.leftbarWrapper ul{
+    margin-left: 0;
+    padding: 0;
+}
+.leftbarCard{
+    background-color: rgb(231, 210, 250);
+    height: 12.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-flow: column;
+}
+.banner{
+    border-radius: 0.5rem;
+    height: 3.75rem;
+    background-color: rgb(106, 25, 143);
+}
+.profileInfo{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 0.7rem;
+}
+.profileInfoItem p{
+    font-size: 0.8rem;
+}
+
+.profileInfoItem img{
+    padding: 0.3rem;
+    margin-top: -2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: linear-gradient(45deg,#bb95e5,#6406df);
+}
+
+.userInfo{
+    display: flex;
+    align-items: center;
+    color: rgb(83, 83, 83);
+    justify-content: space-evenly;
+}
+
+.userInfo li:nth-child(2){
+    border-right: 1px solid grey;
+
+}
+.userInfoItem{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.leftbarListWrapper{
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgb(231, 210, 250);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    max-height: 20rem;
+    overflow: scroll;
+}
+
+
+.leftbarListWrapper::-webkit-scrollbar {
+    width: 0.5em;
+  } 
+.leftbarListWrapper::-webkit-scrollbar-thumb {
+    background : linear-gradient(rgb(205, 138, 250),rgb(243, 173, 243));
+    border-radius: 1rem;
+  }
+.leftbarListWrapper{
+    overflow-x: hidden;
+}
+
+.leftbarListWrapper h4{
+    margin-bottom: 1rem;
+}
+.leftbarList{ 
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgb(227, 186, 245);
+
+}
+.leftbarList:nth-child(3){
+    border-bottom: 0px;
+}
+.leftbarList li{
+    font-size: 0.8rem;
+}
+.leftbarListItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.leftbarIcon{
+    margin-right: 0.5rem;
+    font-size: 0.9rem !important;
+}
+.colored{
+    color: rgb(74, 0, 170);
+}
