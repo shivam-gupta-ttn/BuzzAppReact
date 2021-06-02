@@ -6,7 +6,7 @@ import axiosImg from "axios";
 import Spinner from "../UI/spinner/Spinner";
 
 
-export default function Share({ data, postUpdate }) {
+export default function Share({ data }) {
     const [loading, setloading] = useState(false)
     const [sharePost, setsharePost] = useState({
         desc: "",
@@ -22,7 +22,6 @@ export default function Share({ data, postUpdate }) {
         axios.post(`/${data?._id}/post`, sharePost).then(res => {
             console.log(res)
             if (res.status == 200) {
-                postUpdate();
                 setsharePost({ desc: "", imgId: "" })
             }
         })
@@ -40,14 +39,13 @@ export default function Share({ data, postUpdate }) {
             axios.post(`/${data?._id}/post`, sharePost).then(res => {
                 console.log(res)
                 if (res.status == 200) {
-                    postUpdate();
                     setsharePost({ desc: "", imgId: "" })
                     setloading(false)
                 }
             })
                 .catch(err => {
                     console.log(err)
-                    setloading(false)   
+                    setloading(false)
                 })
         }
         else {
@@ -65,7 +63,7 @@ export default function Share({ data, postUpdate }) {
             })
         }
     }
-    const Loader = loading?<Spinner/>:null
+    const Loader = loading ? <Spinner /> : null
     return (
         <div className="share">
             <div className="shareWrapper">
@@ -85,7 +83,7 @@ export default function Share({ data, postUpdate }) {
                     <div className="shareOptions">
                         <div className="shareOption">
                             <label htmlFor="file-input">
-                            
+
                                 <PermMedia htmlColor="tomato" className="shareIcon" />
                                 <span className="shareOptionText">Photo or Video</span>
 

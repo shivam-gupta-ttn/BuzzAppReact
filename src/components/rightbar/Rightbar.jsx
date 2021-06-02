@@ -5,6 +5,7 @@ import axios from "../../axios-users";
 import { updateObject } from "../../shared/utility"
 import { Link } from "react-router-dom";
 import Suggestion from "./suggestion/Suggestion";
+import FriendList from "./friendList/FriendList";
 
 
 export default function Rightbar() {
@@ -34,13 +35,15 @@ export default function Rightbar() {
     let friendList = [];
     for (let key in friends) {
         friendList.push({
-            name: friends[key][0].name,
-            id: friends[key][0]._id,
-            profilePicture: friends[key][0].profilePicture,
-            email: friends[key][0].email
+            name: friends[key][0]?.name,
+            id: friends[key][0]?._id,
+            profilePicture: friends[key][0]?.profilePicture,
+            email: friends[key][0]?.email
         });
     }
-    let friend = friendList.map((e) => (<div className="suggestionUser" key={e.id}><img src={e.profilePicture} /> <Link className="Link" to={`/userprofile/${e.id}`} key={e.id}>{e.name}</Link></div>))
+    let friend = friendList.map((e, i) => (
+        <FriendList friendList={e} key={i} />
+    ))
     // suggestions logic  
     useEffect(() => {
         axios.get("/suggestions/all").then(data => {
@@ -106,7 +109,7 @@ export default function Rightbar() {
                         <input type="text" placeholder="Search..." onChange={filterOnChangeFriends} />
                         <label htmlFor="search"><SearchIcon className="rightbarIcon" /></label>
                     </span>
-                    {showFriends.type ? friend : <div className="friendUser" key={showFriends.data.id}><img src={showFriends.data.profilePicture} /> <Link className="Link" to={`/userprofile/${showFriends.data.id}`} key={showFriends.data.id}>{showFriends.data.name}</Link></div>}
+                    {showFriends.type ? friend : <FriendList friendList={showFriends.data} />}
                 </ul>
                 <ul className="suggestionList">
                     <span className="suggestionListItem"> <h5>Suggestions</h5>

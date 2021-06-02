@@ -25,7 +25,7 @@ const Leftbar = (props) => {
                     </ul>
                     <ul className="userInfo">
                         <li className="userInfoItem">
-                            <h4>{props.user && props.user.friends?.length || ""}</h4>
+                            <h4>{props.user && props.user.friends?.length || "0"}</h4>
                             <span>Friends</span>
                         </li>
                         <li className="userInfoItem">
@@ -33,8 +33,10 @@ const Leftbar = (props) => {
                             <br></br>
                         </li>
                         <li className="userInfoItem">
-                            <h4>2</h4>
-                            <span>Posts</span>
+                            <a href={props.user && props.user.website || ""}>
+                                <h4>{props.user && props.user.website || ""}</h4>
+                            </a>
+                            <span>Website</span>
                         </li>
                     </ul>
                 </div>

@@ -14,6 +14,6 @@ body::-webkit-scrollbar {
  
 body::-webkit-scrollbar-thumb {
   border-radius: 1rem;
-  background : linear-gradient(rgb(205, 138, 250),rgb(243, 173, 243));
+  background : linear-gradient(#bb95e5,#6406df);
 
 }

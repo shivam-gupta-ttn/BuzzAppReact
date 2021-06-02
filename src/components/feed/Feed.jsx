@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 const Post = React.lazy(() => import("../post/Post"))
 
-const Feed=(props) =>{
+const Feed = (props) => {
 
     const [posts, setposts] = useState([])
     const [isFetching, setIsFetching] = useState(false);
@@ -59,8 +59,8 @@ const Feed=(props) =>{
         setIsFetching(false);
     };
     useEffect(() => {
-        setisAdmin(props.user?.isAdmin)
-
+        if(props.user?.role === "admin")
+        setisAdmin(true)
     }, [props.user])
 
     let post =
@@ -75,20 +75,15 @@ const Feed=(props) =>{
         <Suspense key={i} fallback="loading...">
             <AdminPost key={i} data={e} />
         </Suspense>
-    ))
+    ));
 
-
+    const admin = isAdmin ? <div className="switchWrapper"><label className="switch"><input type="checkbox" onClick={() => (setadminView((p) => !p))} /><span className="slider round">Admin</span></label> </div> : null
 
     return (
         <div className="feed">
             <div className="feedWrapper">
-                <div className="switchWrapper">
-                    <label className="switch">
-                        <input type="checkbox" disabled={!isAdmin} onClick={() => (setadminView((p) => !p))} />
-                        <span className="slider round">Admin</span>
-                    </label>
-                </div>
-                <Share data={props.user}/>
+                {admin}
+                <Share data={props.user} />
 
                 <div className="postFeeddWrapper">
 

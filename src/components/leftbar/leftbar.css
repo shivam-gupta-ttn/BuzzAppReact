@@ -1,9 +1,10 @@
 .leftbar{
     flex: 3;
     position: sticky;
-    top: 2rem;
+    top: 4.3rem;
     height: 50rem;
     max-width: 20rem;
+
 }
 .leftbarWrapper{
     padding: 1.3rem;
@@ -20,16 +21,20 @@
     padding: 0;
 }
 .leftbarCard{
-    background-color: rgb(231, 210, 250);
+    background-color: rgb(255, 255, 255);
     height: 12.5rem;
     border-radius: 0.5rem;
     display: flex;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
     flex-flow: column;
 }
 .banner{
     border-radius: 0.5rem;
     height: 3.75rem;
-    background-color: rgb(106, 25, 143);
+    /* background-color: rgb(135, 39, 180); */
+    background: linear-gradient(45deg,#bb95e5,#6406df);
+
 }
 .profileInfo{
     display: flex;
@@ -42,18 +47,19 @@
 }
 
 .profileInfoItem img{
-    padding: 0.3rem;
     margin-top: -2rem;
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
-    background: linear-gradient(45deg,#bb95e5,#6406df);
+    /* background: linear-gradient(45deg,#bb95e5,#6406df); */
+    background-color: rgb(151, 151, 151);
 }
 
 .userInfo{
     display: flex;
     align-items: center;
     color: rgb(83, 83, 83);
+    
     justify-content: space-evenly;
 }
 
@@ -66,12 +72,21 @@
     flex-flow: column;
     align-items: center;
 }
+.userInfoItem h4{
+    color: rgb(74, 23, 168);
+
+}
+.userInfoItem a{
+    color: rgb(74, 23, 168);
+}
 .leftbarListWrapper{
     margin-top: 1rem;
     padding: 1rem;
-    background-color: rgb(231, 210, 250);
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
     display: flex;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
     flex-flow: column;
     justify-content: space-between;
     max-height: 25rem;
@@ -83,7 +98,7 @@
     width: 0.5em;
   } 
 .leftbarListWrapper::-webkit-scrollbar-thumb {
-    background : linear-gradient(rgb(205, 138, 250),rgb(243, 173, 243));
+    background : linear-gradient(#bb95e5,#6406df);
     border-radius: 1rem;
   }
 .leftbarListWrapper{

@@ -1,27 +1,37 @@
 import "./topbar.css"
 import { Person, Chat, Notifications } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Notification from "../notification/Notification";
+import Notification from "./notification/Notification";
+import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 
 const Topbar = (props) => {
+    const [showNotification, setshowNotification] = useState(false)
     const [ids, setids] = useState([])
     console.log(props.user)
 
     useEffect(() => {
-        setids(props.user?.friendRequests?.incoming)        
+        setids(props.user?.friendRequests?.incoming)
     }, [props.user])
 
-   let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} />))
+    const onNotificationClickHandler = () => {
+        setshowNotification(!showNotification)
+    }
 
+    let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} />))
+    console.log(showNotification)
+    const dropdown = showNotification ? <div className="dropdown-content">
+        {friendRequests}
+    </div> : null
     //send friend request array on map to notification as props and there find that user
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <span className="logo">
                     <a href="/"> Buzz App</a>
-                </span>     
+                </span>
             </div>
             <div className="topbarRight">
                 <div className="topbarIcons">
@@ -31,10 +41,8 @@ const Topbar = (props) => {
 
                     <div className="topbarIconItem">
                         <div className="dropdown">
-                            <Notifications className="dropbtn" />
-                            <div className="dropdown-content">
-                                {friendRequests}
-                            </div>
+                            <Notifications className="dropbtn" onClick={onNotificationClickHandler} />
+                            {dropdown}
                         </div>
                         <span className="topbarIconBadge">{props.user && props.user?.friendRequests?.incoming.length || ""}</span>
                     </div>

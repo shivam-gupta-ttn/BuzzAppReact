@@ -1,7 +1,7 @@
 .topbarContainer{
     height: 50px;
     width: 100%;
-    background-color: rgb(154, 26, 228);
+    background-color: rgb(255, 255, 255);
     box-shadow: 2px;
     display: flex;
     align-items: center;
@@ -9,25 +9,31 @@
     justify-content: space-between;
     top: 0;
     z-index: 999;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
     
 }
 .topbarLeft a{
-    color: white;
+    color: rgb(124, 74, 218);
+
     padding: 0.4rem;
     font-weight: bold;
 }
 
 .topbarLeft{
-    color: white;
+    color: rgb(124, 74, 218);
+
 }
 .topbarRight{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: white;
+    color: rgb(124, 74, 218);
+
 }
 .topbarRight a{
-    color: white;
+    color: rgb(124, 74, 218);
+
 
 }
 .topbarIcons{
@@ -40,7 +46,7 @@
     margin-right: 2rem;
     cursor: pointer;
     position: relative;
-    text-shadow: 2px 2px 5px rgb(41, 1, 41) !important;
+    /* text-shadow: 2px 2px 5px rgb(41, 1, 41) !important; */
 
 }
 .topbarIconBadge{
@@ -48,7 +54,8 @@
     height: 15px;
     background-color: red;
     border-radius: 50%;
-    color: white;
+    color: rgb(124, 74, 218);
+
     position: absolute;
     top: -5px;
     right: -5px;
@@ -58,15 +65,19 @@
     font-size: 12px;
 }
  
-  .dropdown-content {
-    display: none;
+.dropdown-content {
+    display: block;
     position: absolute;
     margin-left: -8rem;
-    background-color: rgb(226, 213, 255);
-    min-width: 10rem;
-    z-index: 1;
+    min-height: 6rem;
+    /* padding-top: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem; */
+    background-color: rgb(194, 140, 255);
+    width: 15rem;
+    z-index: 9;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
   }
   
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
+

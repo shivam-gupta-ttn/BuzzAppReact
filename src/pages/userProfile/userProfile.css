@@ -1,5 +1,4 @@
 .userContainer{
-    height: calc(60vh);
     display: flex;
     justify-content: space-between;
     width: 90%;
@@ -7,14 +6,20 @@
     gap: 1rem;
 
 }
+a{
+    text-decoration: none;
+}
 .userProfile{
     margin-top: 1.3rem;
     border-radius: 0.5rem;
     flex: 6;
     display: flex;
     flex-flow: column;
+    height: 25rem;
     background-color: rgb(231, 210, 250);
-    gap:1rem;
+    gap:1rem;   
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
 }
 .userBanner{
     height: 8rem;
@@ -101,5 +106,5 @@
 
 }
 .suggestions{
-    flex:2;
+    flex: 2;
 }

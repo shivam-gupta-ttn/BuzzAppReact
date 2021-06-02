@@ -1,0 +1,3 @@
+* 4a9a785 : posts sort corrected, login page design
+* df5941e : redux implementation
+* dc4429e : re initialized git repo

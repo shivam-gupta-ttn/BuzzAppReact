@@ -35,7 +35,7 @@
     font-size: 0.7rem;
 }
 .postTopRight{
-    color: rgb(255, 210, 125);
+    color: rgb(224, 45, 120);
     cursor: pointer;
     
 }
@@ -84,7 +84,7 @@
 
 }
 .postCommentIcon{
-    color: rgb(247, 168, 207);
+    color: rgb(158, 45, 224);
     cursor: pointer;
 }
 .comment{
