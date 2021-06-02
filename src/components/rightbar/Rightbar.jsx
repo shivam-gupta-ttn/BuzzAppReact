@@ -23,13 +23,14 @@ export default function Rightbar() {
             // console.log(data)
             if (friends === null) {
                 const updatedFriends = updateObject(friends, data.data)
+                console.log(data)
                 setfriends(updatedFriends)
             }
         }).catch(err => {
             console.log(err)
         })
     }, [friends])
-
+    console.log(friends)
     let friendList = [];
     for (let key in friends) {
         friendList.push({

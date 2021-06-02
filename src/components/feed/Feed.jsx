@@ -23,12 +23,9 @@ const Feed=(props) =>{
             setposts([])
             setIsFetching(false)
             setPage(1)
-            setupdatedPost(false)
         }
     }, [])
-    const changeStateHandler = () => {
-        setupdatedPost(true)
-    }
+
     const handleScroll = () => {
         if (
             Math.ceil(window.innerHeight + document.documentElement.scrollTop) !== document.documentElement.offsetHeight ||
@@ -42,11 +39,11 @@ const Feed=(props) =>{
     };
 
     const fetchData = async () => {
-        axios.get(`/post/all?page=${page}`).then(data => {
-            console.log(data)
+        axios.get(`/post/all?page=${page}`).then(res => {
+            console.log(res)
             setPage(page + 1)
             setposts(() => {
-                return [...posts, ...data.data]
+                return [...posts, ...res.data]
             })
         }).catch(err => {
             console.log(err)
@@ -91,7 +88,7 @@ const Feed=(props) =>{
                         <span className="slider round">Admin</span>
                     </label>
                 </div>
-                <Share data={props.user} postUpdate={changeStateHandler} />
+                <Share data={props.user}/>
 
                 <div className="postFeeddWrapper">
 

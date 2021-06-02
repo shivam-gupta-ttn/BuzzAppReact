@@ -1,8 +1,8 @@
 .leftbar{
     flex: 3;
     position: sticky;
-    height: 20rem;
-    top: 4.3rem;
+    top: 2rem;
+    height: 50rem;
     max-width: 20rem;
 }
 .leftbarWrapper{
@@ -74,7 +74,7 @@
     display: flex;
     flex-flow: column;
     justify-content: space-between;
-    max-height: 20rem;
+    max-height: 25rem;
     overflow: scroll;
 }
 

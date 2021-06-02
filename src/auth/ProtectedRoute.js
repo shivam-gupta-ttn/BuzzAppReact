@@ -26,7 +26,7 @@ function ProtectedRoute({component:Component,...rest}) {
     console.log("protected",user)
     return (
         <Route {...rest} render={props=> isAuthenticated ? (
-            <Component {...props} userdata={user}/>
+            <Component {...props} />
           ) : <Redirect to="/login"/> } />
     )
 }

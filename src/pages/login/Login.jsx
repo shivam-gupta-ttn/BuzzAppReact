@@ -1,5 +1,6 @@
 import React from 'react'
 import "./login.css"
+import logo from "../../assets/tothenew.png"
 
 export default function Login() {
     return (
@@ -7,15 +8,19 @@ export default function Login() {
             <div className="loginWrapper">
                 <div className="loginLeft">
                     <h3>Login with Google</h3>
-                    <a href="http://localhost:5500/auth/google">login</a>
+                    <h4>Use tothenew Id to Login</h4>
+                    <img className="loginImg" src={logo} alt=""/> <br/>
+                    <a href="http://localhost:5500/auth/google"><button className="loginButton">
+                        login
+                        </button></a>
                 </div>
                 <div className="loginRight">
-                    <h3>Login using email and password</h3>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" />
+                    <h3>Login to your Account</h3>
+                    <input type="email" placeholder="TTN Email"/>
                     <br />
-                    <label htmlFor="email">Email</label>
-                    <input type="email" />
+                    <input type="password" placeholder="Password" />
+                    <br/>
+                    <button className="loginButton">login</button>
                 </div>
             </div>
 
