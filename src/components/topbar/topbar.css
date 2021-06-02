@@ -24,6 +24,11 @@
     color: rgb(124, 74, 218);
 
 }
+.logo img{
+    margin-left: 1rem;
+    width: 4rem;
+    height: 3rem;
+}
 .topbarRight{
     display: flex;
     align-items: center;
@@ -47,7 +52,9 @@
     cursor: pointer;
     position: relative;
     /* text-shadow: 2px 2px 5px rgb(41, 1, 41) !important; */
-
+}
+.topbarIconItem:hover{
+    color: rgb(71, 37, 134);
 }
 .topbarIconBadge{
     width: 15px;

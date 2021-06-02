@@ -3,7 +3,7 @@
     height: 9rem;
     position: sticky;
     top: 5.5rem;
-    z-index: 10;
+    z-index: 3;
     border-radius: 0.5rem;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
     box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);

@@ -2,8 +2,7 @@ import "./topbar.css"
 import { Person, Chat, Notifications } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Notification from "./notification/Notification";
-import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import logo from "../../assets/tothenew.png"
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -30,7 +29,9 @@ const Topbar = (props) => {
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <span className="logo">
-                    <a href="/"> Buzz App</a>
+                    <a href="/"> 
+                    <img src={logo} alt="Buzz App" />
+                    </a>
                 </span>
             </div>
             <div className="topbarRight">
