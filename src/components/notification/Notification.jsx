@@ -2,12 +2,13 @@ import axios from "../../axios-users"
 import { useEffect, useState } from "react"
 import "./notification.css"
 
-export default function Notification({data}) {
+export default function Notification(props) {
     const [notificationUser, setnotificationUser] = useState({
         name:"",
     })
+    console.log(props)
     useEffect(() => {
-            axios.get(`/${data}`).then(data=>{
+            axios.get(`/${props.userId}`).then(data=>{
                 setnotificationUser({
                     name:data.data.name
                 })
@@ -16,14 +17,14 @@ export default function Notification({data}) {
             })
     }, [])
     const onAcceptHandler = ()=>{
-        axios.put(`/${data}/accept`).then(res=>{
+        axios.put(`/${props.userId}/accept`).then(res=>{
             console.log(res) 
         }).catch(err=>{
             console.log(err)
         })
     }
     const onRejectHandler = ()=>{
-        axios.put(`/${data}/reject`).then(res=>{
+        axios.put(`/${props.userId}/reject`).then(res=>{
             console.log(res)
         }).catch(err=>{
             console.log(err)

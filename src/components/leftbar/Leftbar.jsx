@@ -1,9 +1,10 @@
 import "./leftbar.css";
 import { ExpandMore, Bookmark, Chat, Group, HelpOutline, PlayCircleFilledOutlined, RssFeed, School, WorkOutline, Event } from "@material-ui/icons";
+import { connect } from "react-redux";
 
 
-export default function Leftbar({ data }) {
-    // console.log("leftbar",data)
+const Leftbar = (props) => {
+    // console.log("leftbar",props.user)
     return (
         <div className="leftbar">
             <div className="leftbarWrapper">
@@ -12,19 +13,19 @@ export default function Leftbar({ data }) {
                     </div>
                     <ul className="profileInfo">
                         <li className="profileInfoItem">
-                            <img src={data && data.profilePicture || ""} alt="" />
+                            <img src={props.user && props.user.profilePicture || ""} alt="" />
                         </li>
                         <li className="profileInfoItem">
-                            {data && data.name || "user"}
+                            {props.user && props.user.name || "user"}
                         </li>
                         <li className="profileInfoItem">
-                            <p>Designation : {data && data.designation || ""}</p>
+                            <p>Designation : {props.user && props.user.designation || ""}</p>
                         </li>
 
                     </ul>
                     <ul className="userInfo">
                         <li className="userInfoItem">
-                            <h4>{data && data.friends?.length || ""}</h4>
+                            <h4>{props.user && props.user.friends?.length || ""}</h4>
                             <span>Friends</span>
                         </li>
                         <li className="userInfoItem">
@@ -103,3 +104,10 @@ export default function Leftbar({ data }) {
         </div>
     )
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        loading: state.user.loading,
+    };
+};
+export default connect(mapStateToProps)(Leftbar)

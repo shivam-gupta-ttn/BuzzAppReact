@@ -1,3 +1,3 @@
-// export {
-//     fetchUser
-// } from './user';
+export {
+    fetchUser
+} from './user';

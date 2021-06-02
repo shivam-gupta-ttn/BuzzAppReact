@@ -3,10 +3,11 @@ import "./feed.css"
 import React, { useEffect, useState, Suspense, useContext } from "react";
 import axios from "../../axios-posts";
 import AdminPost from "../adminPost/AdminPost";
+import { connect } from "react-redux";
 
 const Post = React.lazy(() => import("../post/Post"))
 
-export default function Feed({ data }) {
+const Feed=(props) =>{
 
     const [posts, setposts] = useState([])
     const [isFetching, setIsFetching] = useState(false);
@@ -14,7 +15,6 @@ export default function Feed({ data }) {
     const [updatedPost, setupdatedPost] = useState(false)
     const [isAdmin, setisAdmin] = useState(false)
     const [adminView, setadminView] = useState(false)
-
 
     useEffect(() => {
         fetchData();
@@ -62,9 +62,9 @@ export default function Feed({ data }) {
         setIsFetching(false);
     };
     useEffect(() => {
-        setisAdmin(data?.isAdmin)
+        setisAdmin(props.user?.isAdmin)
 
-    }, [data])
+    }, [props.user])
 
     let post =
         posts?.map((e, i) => (
@@ -91,7 +91,7 @@ export default function Feed({ data }) {
                         <span className="slider round">Admin</span>
                     </label>
                 </div>
-                <Share data={data} postUpdate={changeStateHandler} />
+                <Share data={props.user} postUpdate={changeStateHandler} />
 
                 <div className="postFeeddWrapper">
 
@@ -102,3 +102,10 @@ export default function Feed({ data }) {
         </div>
     )
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        loading: state.user.loading,
+    };
+};
+export default connect(mapStateToProps)(Feed)

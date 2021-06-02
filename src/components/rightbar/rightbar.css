@@ -20,14 +20,28 @@
     margin-left: 0;
     padding: 0;
 }
+
 .friendList{
     background-color: rgb(231, 210, 250);
     border-radius: 0.5rem;
     display: flex;
+    min-height: 10rem;
+    max-height: 15rem;
     flex-flow: column;
     margin-bottom: 0.7rem;
-
+    overflow: scroll;
 }
+.friendList::-webkit-scrollbar {
+    width: 0.5em;
+  } 
+.friendList::-webkit-scrollbar-thumb {
+    background : linear-gradient(rgb(205, 138, 250),rgb(243, 173, 243));
+    border-radius: 1rem;
+  }
+.friendList{
+    overflow-x: hidden;
+}
+
 .friendList Link{
     display: flex;
     align-items: center;
@@ -35,9 +49,9 @@
 
 }
 .friendList img{
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.5rem;
+    width: 2rem;
+    margin-left: 1rem;
+    height: 2rem;
     border-radius: 50%;
     background: linear-gradient(45deg,#bb95e5,#6406df);
 }
@@ -50,7 +64,8 @@
 .suggestionList{
     background-color: rgb(231, 210, 250);
     border-radius: 0.5rem;
-    height: 300px;
+    min-height: 10rem;
+    max-height: 15rem;
     overflow: scroll;
     flex-flow: column;
 }

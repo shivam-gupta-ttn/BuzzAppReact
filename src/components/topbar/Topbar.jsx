@@ -2,22 +2,31 @@ import "./topbar.css"
 import { Person, Chat, Notifications } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Notification from "../notification/Notification";
+import { connect } from "react-redux";
+import { useEffect, useState } from "react";
 
-export default function Topbar({ data }) {
-    console.log(data)
-    let friendRequests = data?.friendRequests?.incoming?.map((e, i) => (<Notification key={i} data={e} />))
+const Topbar = (props) => {
+    const [ids, setids] = useState([])
+    console.log(props.user)
+
+    useEffect(() => {
+        setids(props.user?.friendRequests?.incoming)        
+    }, [props.user])
+
+   let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} />))
+
     //send friend request array on map to notification as props and there find that user
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <span className="logo">
                     <a href="/"> Buzz App</a>
-                </span>
+                </span>     
             </div>
             <div className="topbarRight">
                 <div className="topbarIcons">
                     <div className="topbarIconItem">
-                        <Person /><a href="/editprofile">{data && data.name || "user"}</a>
+                        <Person /><a href="/editprofile">{props.user && props.user.name || "user"}</a>
                     </div>
 
                     <div className="topbarIconItem">
@@ -27,7 +36,7 @@ export default function Topbar({ data }) {
                                 {friendRequests}
                             </div>
                         </div>
-                        <span className="topbarIconBadge">{data && data.friendRequests.incoming.length || ""}</span>
+                        <span className="topbarIconBadge">{props.user && props.user?.friendRequests?.incoming.length || ""}</span>
                     </div>
                     <div className="topbarIconItem">
                         <Chat />
@@ -42,3 +51,10 @@ export default function Topbar({ data }) {
         </div>
     )
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        loading: state.user.loading,
+    };
+};
+export default connect(mapStateToProps)(Topbar)

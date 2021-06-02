@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "../../axios-users";
 import { updateObject } from "../../shared/utility"
 import { Link } from "react-router-dom";
-import Suggestion from "../suggestion/Suggestion";
+import Suggestion from "./suggestion/Suggestion";
 
 
 export default function Rightbar() {

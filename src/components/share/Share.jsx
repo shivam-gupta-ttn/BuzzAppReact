@@ -3,6 +3,8 @@ import { PermMedia } from "@material-ui/icons"
 import { useEffect, useState } from "react"
 import axios from "../../axios-posts"
 import axiosImg from "axios";
+import Spinner from "../UI/spinner/Spinner";
+
 
 export default function Share({ data, postUpdate }) {
     const [loading, setloading] = useState(false)
@@ -33,19 +35,23 @@ export default function Share({ data, postUpdate }) {
     const onSharePostHandler = async (event) => {
         event.preventDefault()
         if (shareImage == "" && sharePost.desc == "") return;
+        setloading(true)
         if (shareImage == "") {
             axios.post(`/${data?._id}/post`, sharePost).then(res => {
                 console.log(res)
                 if (res.status == 200) {
                     postUpdate();
                     setsharePost({ desc: "", imgId: "" })
+                    setloading(false)
                 }
             })
                 .catch(err => {
                     console.log(err)
+                    setloading(false)   
                 })
         }
         else {
+            setloading(true)
             const formData = new FormData()
             formData.append("file", shareImage);
             formData.append("upload_preset", "sxiwvrm4");
@@ -59,7 +65,7 @@ export default function Share({ data, postUpdate }) {
             })
         }
     }
-
+    const Loader = loading?<Spinner/>:null
     return (
         <div className="share">
             <div className="shareWrapper">
@@ -72,13 +78,14 @@ export default function Share({ data, postUpdate }) {
                         onChange={inputChangeHandler}
                         required
                     />
+                    {Loader}
                 </div>
                 <hr className="shareHr" />
                 <div className="shareBottom">
                     <div className="shareOptions">
                         <div className="shareOption">
                             <label htmlFor="file-input">
-
+                            
                                 <PermMedia htmlColor="tomato" className="shareIcon" />
                                 <span className="shareOptionText">Photo or Video</span>
 
