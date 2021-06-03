@@ -13,7 +13,9 @@
     flex: 6;
     display: flex;
     flex-flow: column;
-    background-color: rgb(231, 210, 250);
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    background-color: rgb(255, 255, 255);
 }
 .editProfileBanner{
     height: 8rem;
@@ -25,6 +27,7 @@
     flex-flow: column;
     justify-content: space-between;
     margin-left: 1.5rem;
+    
     gap:0.5rem;
 }
 .editProfileInfo img{
@@ -36,8 +39,15 @@
 }
 .editProfileInfoIcon{
     margin-top: -1.7rem;
-    margin-left: 6rem;
-    color: purple;
+    margin-left: 7rem;
+    font-size: 1.7rem !important;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68) !important; 
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68) !important;
+    transition: transform .5s;  
+    color: #6406df;
+}
+.editProfileInfoIcon:hover{
+    transform: scale(1.2); 
 }
 
 .editProfileInfo label{

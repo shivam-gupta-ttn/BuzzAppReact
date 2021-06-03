@@ -46,7 +46,7 @@ const EditProfile = (props) => {
         console.log(editUser)
     }
     useEffect(() => {
-        if(profileImg == "") return;
+        if (profileImg == "") return;
         axios.put(`/${props.user._id}`, editUser).then(res => {
             console.log(res)
             setuserUpdated(true)
@@ -68,7 +68,7 @@ const EditProfile = (props) => {
                 console.log(err)
                 setuserUpdated(false)
             })
-        }else{
+        } else {
             const formData = new FormData()
             formData.append("file", profileImg);
             formData.append("upload_preset", "sxiwvrm4");
@@ -94,7 +94,7 @@ const EditProfile = (props) => {
 
                     <div className="editProfileInfo">
                         <img src={props.user && props.user.profilePicture || ""} alt="" />
-                        <label htmlFor="file-input">
+                        <label htmlFor="file-input" className="editProfileImgLabel">
                             <AddAPhotoIcon className="editProfileInfoIcon" />
                         </label>
                         <input type="file" name="" id="file-input" onChange={(event) => {

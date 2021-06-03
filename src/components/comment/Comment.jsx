@@ -19,10 +19,10 @@ export default function Comment({ data }) {
     return (
         <div className="comments">
             <div className="commentWrapper">
-                <img className="commentProfileImg" src={user.profilePicture} alt=""/>
+                <img className="commentProfileImg" src={user.profilePicture} alt="" />
                 <div className="commentBody">
-                <span className="commentUser">{user.name} : </span>
-                <span className="commentInfo">{data.comment}</span>
+                    <span className="commentUser">{user.name} : </span>
+                    <span className="commentInfo">{data.comment}</span>
                 </div>
             </div>
         </div>

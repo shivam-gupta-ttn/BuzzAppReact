@@ -7,11 +7,11 @@ import "./home.css"
 
 const Home = () => {
     return (
-        <>            
-            <Topbar/>
+        <>
+            <Topbar />
             <div className="homeContainer">
                 <Leftbar />
-                <Feed  />
+                <Feed />
                 <Rightbar />
 
             </div>

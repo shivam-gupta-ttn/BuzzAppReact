@@ -65,6 +65,20 @@ const UserProfile = (props) => {
         </span>
     </button>
 
+
+    const cityli = userInfo.city ?
+        <li className="userDetailsItem">{userInfo.city}</li> : null
+
+    const stateli = userInfo.state ?
+        <li className="userDetailsItem">{userInfo.state}</li> : null
+
+    const zipli = userInfo.pin ?
+        <li className="userDetailsItem">{userInfo.zip}</li> : null
+
+    const desig = userInfo.designation ?
+        <p>{userInfo.designation}</p> : null
+
+
     return (
         <>
             <Topbar />
@@ -76,12 +90,12 @@ const UserProfile = (props) => {
                     <div className="userProfileInfo">
                         <img src={userInfo.profilePicture} alt="" />
                         <h2>{userInfo.name}</h2>
-                        <p>{userInfo.designation}</p>
                         <p>{userInfo.email}</p>
+                        {desig}
                         <ul className="userDetails">
-                            <li className="userDetailsItem">{userInfo.city}</li>
-                            <li className="userDetailsItem">{userInfo.state}</li>
-                            <li className="userDetailsItem">{userInfo.zip}</li>
+                            {cityli}
+                            {stateli}
+                            {zipli}
                             <li className="userDetailsItem">{userInfo.friendCount} friends</li>
                         </ul>
                     </div>
@@ -95,6 +109,7 @@ const UserProfile = (props) => {
                         </button>
                     </div>
                 </div>
+
                 <div className="suggestions">
                     <Rightbar />
                 </div>

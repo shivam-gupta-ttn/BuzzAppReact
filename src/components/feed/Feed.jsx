@@ -86,7 +86,7 @@ const Feed = (props) => {
     const onCheckVerifyHandler = () => {
         axiosUser.put("/verify/user", verifyInput).then(res => {
             console.log(res)
-            setverifyInput({password:""})
+            setverifyInput({ password: "" })
             setverify(false)
 
         }).catch(err => {

@@ -54,7 +54,12 @@
 }
 .shareIcon{
     font-size: 1.2rem;
+    transition: transform .5s;  
     cursor: pointer;
+}
+.shareIcon:hover{
+    transform: scale(1.2); 
+
 }
 .shareOptionText{
     font-size: 0.8rem;

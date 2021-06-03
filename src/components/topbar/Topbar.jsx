@@ -29,8 +29,8 @@ const Topbar = (props) => {
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <span className="logo">
-                    <a href="/"> 
-                    <img src={logo} alt="Buzz App" />
+                    <a href="/">
+                        <img src={logo} alt="Buzz App" />
                     </a>
                 </span>
             </div>
