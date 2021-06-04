@@ -39,6 +39,8 @@ a{
     background: linear-gradient(45deg,#b5dcfc,#91dcff);
     margin-top: -5rem;
     border-radius: 0.5rem;
+    object-fit: cover;
+
 }
 .userContainer ul{
     list-style-type: none;

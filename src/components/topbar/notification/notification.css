@@ -1,7 +1,11 @@
 .notificationWrapper{
     padding: 1rem;
-    background-color: rgb(226, 207, 238);
+    background-color: rgb(253, 253, 253);
+    border-radius: 0.7rem;
     margin: 0.2rem;
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
 }
 
 .ptag{

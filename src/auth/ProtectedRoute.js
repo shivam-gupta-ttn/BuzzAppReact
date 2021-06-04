@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect, Route } from 'react-router';
 import axios from '../axios-users';
+import Spinner from '../components/UI/spinner/Spinner';
 
 
 function ProtectedRoute({ component: Component, ...rest }) {
@@ -21,7 +22,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
         })
     }, [isAuthenticated])
     if (isAuthenticated === null) {
-        return "loading";
+        return <Spinner/>;
     }
     console.log("protected", user)
     return (

@@ -13,6 +13,8 @@ import Comment from "../comment/Comment";
 import moment from "moment"
 
 import { Image } from 'cloudinary-react'
+import Spinner from "../UI/spinner/Spinner";
+import Flagged from "./flagged/Flagged";
 
 export default function AdminPost(props) {
     const [postedBy, setpostedBy] = useState({
@@ -23,6 +25,10 @@ export default function AdminPost(props) {
         value: ""
     })
     const [comments, setcomments] = useState([])
+    const [deleted, setdeleted] = useState(false)
+    const [flagId, setflagId] = useState([])
+    const [showFlagged, setshowFlagged] = useState(false)
+
     useEffect(() => {
         axios.get(`${props.data.userId}`).then(data => {
             setpostedBy({
@@ -47,15 +53,12 @@ export default function AdminPost(props) {
             console.log(err)
         })
     }
-    const onFlagHandler = (id) => {
-        axiosPost.put(`/${id}/flag`).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
+
     const onDeleteHandler = (id) => {
+        setdeleted(true)
         axiosPost.delete(`/${id}`).then(res => {
+            setdeleted(false)
+            props.updatedPost(true)
             console.log(res)
         }).catch(err => {
             console.log(err)
@@ -64,6 +67,11 @@ export default function AdminPost(props) {
 
     const inputChangeHandler = ({ target }) => {
         setaddComment({ value: target.value })
+
+    }
+    const onFlagClickHandler = (data) => {
+        setshowFlagged(!showFlagged)
+        setflagId(data.flagged)
 
     }
     const onCommentHandler = (id) => {
@@ -79,8 +87,12 @@ export default function AdminPost(props) {
     const showCommentHandler = (data) => {
         setcomments(data.comments)
     }
+    let flag = flagId.map((e, i) => (<Flagged key={i} data={e} />))
     let comment = comments.map((e, i) => (<Comment key={i} data={e} />))
-
+    let deletedPost = deleted ? <span><Spinner />Deleting...</span> : null
+    const dropdown = showFlagged ? <div className="dropdown-content">
+        {flag}
+    </div> : null
     return (
         <div className="post">
             <div className="postWrapper">
@@ -91,9 +103,11 @@ export default function AdminPost(props) {
                         <span className="postDate">{props && moment(props.data?.createdAt).fromNow() || ""}</span>
                     </div>
                     <div className="postTopRight">
-                        <FlagIcon onClick={() => onFlagHandler(props.data._id)} />
+                        <FlagIcon onClick={() => onFlagClickHandler(props.data)} />
                         <span className="flagCounter">{props && props.data?.flagged?.length || ""}</span>
+                        {dropdown}
                         <DeleteIcon onClick={() => onDeleteHandler(props.data._id)} />
+                        {deletedPost}
                     </div>
                 </div>
                 <div className="postCenter">

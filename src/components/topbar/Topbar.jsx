@@ -5,7 +5,7 @@ import Notification from "./notification/Notification";
 import logo from "../../assets/tothenew.png"
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-
+import {Link} from "react-router-dom"
 const Topbar = (props) => {
     const [showNotification, setshowNotification] = useState(false)
     const [ids, setids] = useState([])
@@ -29,15 +29,15 @@ const Topbar = (props) => {
         <div className="topbarContainer">
             <div className="topbarLeft">
                 <span className="logo">
-                    <a href="/">
+                    <Link to="/">
                         <img src={logo} alt="Buzz App" />
-                    </a>
+                    </Link>
                 </span>
             </div>
             <div className="topbarRight">
                 <div className="topbarIcons">
                     <div className="topbarIconItem">
-                        <Person /><a href="/editprofile">{props.user && props.user.name || "user"}</a>
+                        <img src={props.user && props.user.profilePicture} /><Link to="/editprofile">{props.user && props.user.name || "user"}</Link>
                     </div>
 
                     <div className="topbarIconItem">
@@ -51,7 +51,7 @@ const Topbar = (props) => {
                         <Chat />
                     </div>
                     <div className="topbarIconItem">
-                        <a href="http://localhost:5500/logout">
+                        <a href="http://localhost:5500/logout" className="tobarIconItemLogout">
                             <ExitToAppIcon /> <span>Logout</span>
                         </a>
                     </div>

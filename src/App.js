@@ -16,7 +16,7 @@ const App = (props) => {
     onFetchUser();
 
   }, [onFetchUser])
-  
+
   return (
     <Switch>
       <ProtectedRoute path="/" component={Home} exact />

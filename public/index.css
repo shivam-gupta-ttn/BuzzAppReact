@@ -1,6 +1,7 @@
 *{  
     margin: 0;
     font-family: 'Varela', sans-serif;
+    scroll-behavior: smooth;
 }
 
 a{

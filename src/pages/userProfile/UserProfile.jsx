@@ -25,13 +25,14 @@ const UserProfile = (props) => {
 
     useEffect(() => {
         axios.get(`/${id}`).then(data => {
-
+            console.log(data.data)
             setuserInfo({
                 name: data.data.name,
                 designation: data.data.designation,
                 email: data.data.email,
                 city: data.data.city,
-                state: data.data.zip,
+                state: data.data.state,
+                zip: data.data.pin,
                 website: data.data.website,
                 friendCount: data.data.friends.length,
                 profilePicture: data.data.profilePicture
@@ -72,7 +73,7 @@ const UserProfile = (props) => {
     const stateli = userInfo.state ?
         <li className="userDetailsItem">{userInfo.state}</li> : null
 
-    const zipli = userInfo.pin ?
+    const zipli = userInfo.zip ?
         <li className="userDetailsItem">{userInfo.zip}</li> : null
 
     const desig = userInfo.designation ?

@@ -6,7 +6,7 @@ import axiosImg from "axios";
 import Spinner from "../UI/spinner/Spinner";
 
 
-export default function Share({ data }) {
+export default function Share({ data, updatedPost }) {
     const [loading, setloading] = useState(false)
     const [sharePost, setsharePost] = useState({
         desc: "",
@@ -19,9 +19,12 @@ export default function Share({ data }) {
     }
     useEffect(() => {
         if (sharePost.imgId === "") return;
-        axios.post(`/${data?._id}/post`, sharePost).then(res => {
+        axios.post(`/post`, sharePost).then(res => {
             console.log(res)
+            setloading(false)
+
             if (res.status == 200) {
+                updatedPost(true)
                 setsharePost({ desc: "", imgId: "" })
             }
         })
@@ -36,11 +39,13 @@ export default function Share({ data }) {
         if (shareImage == "" && sharePost.desc == "") return;
         setloading(true)
         if (shareImage == "") {
-            axios.post(`/${data?._id}/post`, sharePost).then(res => {
+            axios.post(`/post`, sharePost).then(res => {
                 console.log(res)
+                setloading(false)
                 if (res.status == 200) {
+                    updatedPost(true)
+
                     setsharePost({ desc: "", imgId: "" })
-                    setloading(false)
                 }
             })
                 .catch(err => {
@@ -54,7 +59,10 @@ export default function Share({ data }) {
             formData.append("file", shareImage);
             formData.append("upload_preset", "sxiwvrm4");
             await axiosImg.post("https://api.cloudinary.com/v1_1/drkob5xsz/image/upload", formData).then(res => {
+                setloading(false)
                 if (res.status == 200) {
+                    updatedPost(true)
+
                     setsharePost(prevState => ({ ...prevState, ["imgId"]: res.data.url }))
                     console.log("successfully uploaded")
                 }

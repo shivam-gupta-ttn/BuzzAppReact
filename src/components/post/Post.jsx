@@ -13,6 +13,7 @@ import Comment from "../comment/Comment";
 import moment from "moment"
 
 import { Image } from 'cloudinary-react'
+import Spinner from "../UI/spinner/Spinner";
 
 export default function Post(props) {
     const [postedBy, setpostedBy] = useState({
@@ -22,9 +23,11 @@ export default function Post(props) {
     const [addComment, setaddComment] = useState({
         value: ""
     })
+    const [deleted, setdeleted] = useState(false)
     const [like, setlike] = useState(props.data.likes.length)
     const [dislike, setdislike] = useState(props.data.dislikes.length)
     const [comments, setcomments] = useState([])
+    const [flagged, setflagged] = useState(false)
     useEffect(() => {
         axios.get(`${props.data.userId}`).then(data => {
             setpostedBy({
@@ -33,11 +36,19 @@ export default function Post(props) {
 
             })
         })
+        return () => {
+            setdeleted(false)
+            setflagged(false)
+            setpostedBy({
+                name:"",
+                profilePicture:""
+            })
+            props.updatedPost(false)
+        }
     }, [])
 
     const onLikeHandler = (id) => {
         axiosPost.put(`/${id}/like`).then(res => {
-            console.log(res)
             if (res.status == 201) {
                 setlike(like + 1)
             } if (res.status == 200) {
@@ -50,7 +61,6 @@ export default function Post(props) {
     }
     const onDislikeHandler = (id) => {
         axiosPost.put(`/${id}/dislike`).then(res => {
-            console.log(res)
             if (res.status == 201) {
 
                 setdislike(dislike + 1)
@@ -62,17 +72,23 @@ export default function Post(props) {
         })
     }
     const onFlagHandler = (id) => {
+        setflagged(true)
         axiosPost.put(`/${id}/flag`).then(res => {
-            console.log(res)
+            setflagged(false)
         }).catch(err => {
             console.log(err)
         })
     }
     const onDeleteHandler = (id) => {
+        setdeleted(true)
         axiosPost.delete(`/${id}`).then(res => {
-            console.log(res)
+            setdeleted(false)
+            props.updatedPost(true)
         }).catch(err => {
             console.log(err)
+            props.updatedPost(true)
+            setdeleted(false)
+
         })
     }
 
@@ -84,6 +100,7 @@ export default function Post(props) {
         axiosPost.put(`/${id}/comment`, addComment).then(data => {
             console.log(data)
             if (data.status == 200) {
+                props.updatedPost(true)
                 setaddComment({ value: "" })
             }
         }).catch(err => {
@@ -93,7 +110,9 @@ export default function Post(props) {
     const showCommentHandler = (data) => {
         setcomments(data.comments)
     }
+    let deletedPost = deleted ? <span><Spinner />Deleting...</span> : null
     let comment = comments.map((e, i) => (<Comment key={i} data={e} />))
+    let flaggedPost = flagged? <span><Spinner/>Post Flagged</span> : null
 
     return (
         <div className="post">
@@ -106,6 +125,8 @@ export default function Post(props) {
                     </div>
                     <div className="postTopRight">
                         <FlagIcon onClick={() => onFlagHandler(props.data._id)} /><DeleteIcon onClick={() => onDeleteHandler(props.data._id)} />
+                        {deletedPost}
+                        {flaggedPost}
                     </div>
                 </div>
                 <div className="postCenter">

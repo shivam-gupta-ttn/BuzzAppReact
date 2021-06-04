@@ -25,7 +25,7 @@
 
 }
 .logo img{
-    margin-left: 1rem;
+    margin-left: 1rem ;
     width: 4rem;
     height: 3rem;
 }
@@ -33,11 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    color: rgb(124, 74, 218);
+    color: rgb(0, 0, 0);
 
 }
 .topbarRight a{
-    color: rgb(124, 74, 218);
+    color: rgb(0, 0, 0);
 
 
 }
@@ -53,8 +53,16 @@
     position: relative;
     /* text-shadow: 2px 2px 5px rgb(41, 1, 41) !important; */
 }
+.topbarIconItem img{
+    width: 1.8rem;
+    height:1.8rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
 .topbarIconItem:hover{
-    color: rgb(71, 37, 134);
+    color: rgb(0, 0, 0);
 }
 .topbarIconBadge{
     width: 15px;
@@ -77,6 +85,7 @@
     position: absolute;
     margin-left: -8rem;
     min-height: 6rem;
+    border-radius: 0.7rem;
     /* padding-top: 1rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem; */
@@ -85,6 +94,11 @@
     z-index: 9;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68); 
     box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+  }
+  .tobarIconItemLogout{
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
   }
   
 

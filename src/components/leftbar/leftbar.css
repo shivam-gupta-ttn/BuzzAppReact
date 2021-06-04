@@ -51,6 +51,7 @@
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
+    object-fit: cover;
     /* background: linear-gradient(45deg,#bb95e5,#6406df); */
     background-color: rgb(151, 151, 151);
 }

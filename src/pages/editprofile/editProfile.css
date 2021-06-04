@@ -36,6 +36,8 @@
     background: linear-gradient(45deg,#b5dcfc,#91dcff);
     margin-top: -4rem;
     border-radius: 0.5rem;
+    object-fit: cover;
+
 }
 .editProfileInfoIcon{
     margin-top: -1.7rem;
