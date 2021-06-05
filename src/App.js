@@ -7,6 +7,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import * as actions from './store/actions/index';
+import Topbar from "./components/topbar/Topbar";
 
 const App = (props) => {
   const { onFetchUser } = props;
@@ -17,14 +18,31 @@ const App = (props) => {
 
   }, [onFetchUser])
 
-  return (
-    <Switch>
-      <ProtectedRoute path="/" component={Home} exact />
-      <ProtectedRoute path="/userprofile/:id" component={UserProfile} />
+  const otherRoutes = () => (
+    <>
+      <Topbar />
+      <Switch>
+      <ProtectedRoute path="/" component={Home} exact/>
+      <ProtectedRoute path="/userprofile/:id" component={UserProfile} exact/>
       <ProtectedRoute path="/editprofile" component={EditProfile} exact />
-      <Route path="/login" component={Login} exact />
-      <Redirect to="/" />
-    </Switch>
+      <Redirect to="/"/>
+      </Switch>
+    </>
+  )
+
+
+  return (
+    <>
+
+
+      <Switch>
+        <Route path="/login" component={Login} exact />
+        <Route component={otherRoutes} />
+        {/* <ProtectedRoute path="/userprofile/:id" component={UserProfile} />
+        <ProtectedRoute path="/editprofile" component={EditProfile} exact />
+        <Redirect to="/" /> */}
+      </Switch>
+    </>
   );
 }
 const mapStateToProps = state => {

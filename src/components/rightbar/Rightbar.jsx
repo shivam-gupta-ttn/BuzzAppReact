@@ -9,8 +9,8 @@ import FriendList from "./friendList/FriendList";
 
 
 export default function Rightbar() {
-    const [friends, setfriends] = useState(null)
-    const [suggestions, setsuggestions] = useState(null)
+    const [friends, setfriends] = useState([])
+    const [suggestions, setsuggestions] = useState([])
     const [showSuggestions, setshowSuggestions] = useState({
         type: true,
         data: null
@@ -19,26 +19,23 @@ export default function Rightbar() {
         type: true,
         data: null
     })
+    //friends logic
     useEffect(() => {
         axios.get("/friends/all").then(data => {
-            // console.log(data)
-            if (friends === null) {
-                const updatedFriends = updateObject(friends, data.data)
-                console.log(data)
-                setfriends(updatedFriends)
-            }
+            console.log(data.data)
+            setfriends(data.data)
+
         }).catch(err => {
             console.log(err)
         })
-    }, [friends])
-    console.log(friends)
+    }, [])
     let friendList = [];
     for (let key in friends) {
         friendList.push({
-            name: friends[key][0]?.name,
-            id: friends[key][0]?._id,
-            profilePicture: friends[key][0]?.profilePicture,
-            email: friends[key][0]?.email
+            name: friends[key].name,
+            id: friends[key]._id,
+            profilePicture: friends[key].profilePicture,
+            email: friends[key].email
         });
     }
     let friend = friendList.map((e, i) => (
@@ -47,26 +44,28 @@ export default function Rightbar() {
     // suggestions logic  
     useEffect(() => {
         axios.get("/suggestions/all").then(data => {
-            if (suggestions === null) {
-                setsuggestions(data.data)
-            }
+            console.log(data.data)
+            setsuggestions(data.data)
+
         }).catch(err => {
             console.log(err)
         })
-    }, [suggestions])
+    }, [])
 
     let suggestedFriends = [];
     for (let key in suggestions) {
         suggestedFriends.push({
-            name: suggestions[key][0].name,
-            id: suggestions[key][0]._id,
-            profilePicture: suggestions[key][0].profilePicture,
-            email: suggestions[key][0].email
+            name: suggestions[key].name,
+            id: suggestions[key]._id,
+            profilePicture: suggestions[key].profilePicture,
+            email: suggestions[key].email
         });
     }
     let suggestedFriend = suggestedFriends.map((e, i) => (
         <Suggestion suggestedUser={e} key={i} />
     ))
+
+    //searching logic by name and email friends
     const filterOnChangeFriends = (event) => {
         if (event.target.value) {
             setshowFriends({
@@ -83,6 +82,7 @@ export default function Rightbar() {
             })
         }
     }
+    //searching logic by name and email suggestion
     const filterOnChangeSuggestion = (event) => {
         if (event.target.value) {
             setshowSuggestions({

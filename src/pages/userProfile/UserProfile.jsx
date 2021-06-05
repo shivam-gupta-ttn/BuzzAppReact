@@ -6,7 +6,6 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import "./userProfile.css"
 import { useParams } from 'react-router';
 import axios from '../../axios-users';
-import Topbar from '../../components/topbar/Topbar';
 import { connect } from 'react-redux';
 
 const UserProfile = (props) => {
@@ -82,7 +81,6 @@ const UserProfile = (props) => {
 
     return (
         <>
-            <Topbar />
             <div className="userContainer">
                 <div className="userProfile">
                     <div className="userBanner">

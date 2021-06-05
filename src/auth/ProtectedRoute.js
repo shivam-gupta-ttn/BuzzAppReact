@@ -6,25 +6,26 @@ import Spinner from '../components/UI/spinner/Spinner';
 
 function ProtectedRoute({ component: Component, ...rest }) {
     const [isAuthenticated, setisAuthenticated] = useState(null)
-    const [user, setuser] = useState(null)
     useEffect(() => {
 
         axios.get("http://localhost:5500/api/auth/check").then(data => {
             if (data.status === 200) {
                 // console.log(data)
                 setisAuthenticated(true)
-                setuser(data.data)
             } else {
                 setisAuthenticated(false)
             }
         }).catch(err => {
             setisAuthenticated(false)
         })
-    }, [isAuthenticated])
+        return()=>{
+            console.log("...")
+        }
+    }, [])
     if (isAuthenticated === null) {
         return <Spinner/>;
     }
-    console.log("protected", user)
+    console.log("protected")
     return (
         <Route {...rest} render={props => isAuthenticated ? (
             <Component {...props} />

@@ -15,6 +15,7 @@ const Feed = (props) => {
     const [adminPosts, setadminPosts] = useState([])
     const [isFetching, setIsFetching] = useState(false);
     const [verify, setverify] = useState(false)
+    const [postLength, setpostLength] = useState(1)
     const [page, setPage] = useState(1);
     const [adminPage, setadminPage] = useState(1)
     const [isAdmin, setisAdmin] = useState(false)
@@ -49,15 +50,17 @@ const Feed = (props) => {
 
             return;
         }
-        setIsFetching(true);
+        setIsFetching(postLength && true);
         console.log(isFetching);
     };
 
     const fetchData = async () => {
         axios.get(`/post/all?page=${page}`).then(res => {
+
             console.log(res)
             setpostLoader(false)
             setPage(page + 1)
+            setpostLength(res.data.length)
             setposts(() => {
                 return [...posts, ...res.data]
             })

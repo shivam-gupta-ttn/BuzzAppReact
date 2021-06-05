@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Rightbar from '../../components/rightbar/Rightbar'
-import Topbar from "../../components/topbar/Topbar"
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DoneIcon from '@material-ui/icons/Done';
 import "./editProfile.css"
@@ -86,7 +85,6 @@ const EditProfile = (props) => {
 
     return (
         <>
-            <Topbar />
             <div className="editProfile">
                 <div className="editProfileWrapper">
                     <div className="editProfileBanner">
