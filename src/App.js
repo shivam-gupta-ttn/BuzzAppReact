@@ -22,10 +22,10 @@ const App = (props) => {
     <>
       <Topbar />
       <Switch>
-      <ProtectedRoute path="/" component={Home} exact/>
-      <ProtectedRoute path="/userprofile/:id" component={UserProfile} exact/>
-      <ProtectedRoute path="/editprofile" component={EditProfile} exact />
-      <Redirect to="/"/>
+        <ProtectedRoute path="/" component={Home} exact />
+        <ProtectedRoute path="/userprofile/:id" component={UserProfile} exact />
+        <ProtectedRoute path="/editprofile" component={EditProfile} exact />
+        <Redirect to="/" />
       </Switch>
     </>
   )

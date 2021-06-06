@@ -5,7 +5,7 @@ import Notification from "./notification/Notification";
 import logo from "../../assets/tothenew.png"
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 const Topbar = (props) => {
     const [showNotification, setshowNotification] = useState(false)
     const [ids, setids] = useState([])
@@ -13,13 +13,14 @@ const Topbar = (props) => {
 
     useEffect(() => {
         setids(props.user?.friendRequests?.incoming)
-    }, [props.user])
+
+    }, [props.user, showNotification])
 
     const onNotificationClickHandler = () => {
         setshowNotification(!showNotification)
     }
 
-    let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} />))
+    let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} onResponse={setshowNotification} />))
     console.log(showNotification)
     const dropdown = showNotification ? <div className="dropdown-content">
         {friendRequests}

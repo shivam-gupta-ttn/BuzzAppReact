@@ -20,6 +20,8 @@ const UserProfile = (props) => {
         friendCount: "",
         profilePicture: ""
     })
+    const [removed, setremoved] = useState(false)
+    const [added, setadded] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
@@ -36,6 +38,10 @@ const UserProfile = (props) => {
                 friendCount: data.data.friends.length,
                 profilePicture: data.data.profilePicture
             })
+            return () => {
+                setadded(false)
+                setremoved(false)
+            }
 
         }).catch(err => {
             console.log(err)
@@ -43,6 +49,7 @@ const UserProfile = (props) => {
     }, [id])
     const onAddFriendHandler = () => {
         axios.put(`/${id}/addfriend`).then(data => {
+            setadded(true)
             console.log(data)
         }).catch(err => {
             console.log(err)
@@ -50,12 +57,14 @@ const UserProfile = (props) => {
     }
     const onRemoveFriendHandler = () => {
         axios.put(`/${id}/removefriend`).then(data => {
+            setremoved(true)
             console.log(data)
         }).catch(err => {
             console.log(err)
         })
     }
-    const friendButton = props.user?.friends?.includes(id) ? <button className="addFriend" onClick={() => onRemoveFriendHandler()}>
+
+    const friendButton = props.user?.friends?.includes(id) && !removed ? <button className="addFriend" onClick={() => onRemoveFriendHandler()}>
         <span className="addFriendItem">
             <RemoveCircleIcon /> <span>Remove Friend</span>
         </span>
@@ -64,6 +73,10 @@ const UserProfile = (props) => {
             <PersonAdd /> <span>Add Friend</span>
         </span>
     </button>
+
+    const addedFriend = added ? <button className="addFriend">
+        <span>Friend Request Sent !!</span>
+    </button> : friendButton
 
 
     const cityli = userInfo.city ?
@@ -78,6 +91,9 @@ const UserProfile = (props) => {
     const desig = userInfo.designation ?
         <p>{userInfo.designation}</p> : null
 
+    // const userPosts = props.user?.friends.includes(id) ? <div className="userPosts">
+
+    // </div> : null
 
     return (
         <>
@@ -99,7 +115,7 @@ const UserProfile = (props) => {
                         </ul>
                     </div>
                     <div className="userProfileAction">
-                        {friendButton}
+                        {addedFriend}
                         <button className="visitWebsite">
                             <span className="visitWebsiteItem">
                                 <a href={userInfo.website}>  <LanguageIcon /><span>Visit Website</span>
@@ -107,6 +123,7 @@ const UserProfile = (props) => {
                             </span>
                         </button>
                     </div>
+
                 </div>
 
                 <div className="suggestions">

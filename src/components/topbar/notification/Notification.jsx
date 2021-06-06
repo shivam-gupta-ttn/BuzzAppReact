@@ -2,15 +2,17 @@ import axios from "../../../axios-users"
 import { useEffect, useState } from "react"
 import "./notification.css"
 import Spinner from "../../UI/spinner/Spinner"
+import * as actions from "../../../store/actions/index"
+import { connect } from "react-redux"
 
-export default function Notification(props) {
+const Notification = (props) => {
     const [notificationUser, setnotificationUser] = useState({
         name: "",
     })
     const [accepted, setaccepted] = useState(false)
     const [rejected, setrejected] = useState(false)
-    console.log(props)
 
+    const { onFetchUser } = props
     useEffect(() => {
         axios.get(`/${props.userId}`).then(data => {
             setnotificationUser({
@@ -24,23 +26,26 @@ export default function Notification(props) {
         setaccepted(true)
         axios.put(`/${props.userId}/accept`).then(res => {
             setaccepted(false)
+            props.onResponse(false)
+            onFetchUser();
             console.log(res)
         }).catch(err => {
             console.log(err)
         })
     }
-    const accept = accepted? <div className="accepted"><Spinner/>Friend Request Accepted</div> : null
+    const accept = accepted ? <div className="accepted"><Spinner />Friend Request Accepted</div> : null
 
     const onRejectHandler = () => {
         setrejected(true)
         axios.put(`/${props.userId}/reject`).then(res => {
             setrejected(false)
+            props.onResponse(false)
             console.log(res)
         }).catch(err => {
             console.log(err)
         })
     }
-    const reject = rejected? <div className="rejeted"><Spinner/>Friend Request Rejected</div> : null
+    const reject = rejected ? <div className="rejeted"><Spinner />Friend Request Rejected</div> : null
 
     //get user on useEffect
     //perform accept reject functionalities
@@ -59,3 +64,16 @@ export default function Notification(props) {
         </>
     )
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        loading: state.user.loading,
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchUser: () => dispatch(actions.fetchUser())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notification)

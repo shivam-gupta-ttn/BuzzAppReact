@@ -18,7 +18,7 @@ export default function Flagged(props) {
 
     return (
         <div className="flagWrapper">
-                <p className="ptag">{flagUser.name} flagged this post</p>
+            <p className="ptag">{flagUser.name} flagged this post</p>
 
         </div>
     )

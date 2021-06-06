@@ -6,6 +6,7 @@ import "./editProfile.css"
 import axios from '../../axios-users';
 import { connect } from 'react-redux';
 import axiosImg from 'axios';
+import * as actions from "../../store/actions/index";
 
 const EditProfile = (props) => {
     console.log(props)
@@ -23,7 +24,7 @@ const EditProfile = (props) => {
         profilePicture: "",
         birthday: ""
     })
-
+    const { onFetchUser } = props
     useEffect(() => {
         seteditUser({
             fname: props.user.name ? props.user.name.split(" ")[0] : "",
@@ -50,6 +51,7 @@ const EditProfile = (props) => {
             console.log(res)
             setuserUpdated(true)
             setprofileImg("")
+            onFetchUser();
         }).catch(err => {
             console.log(err)
             setuserUpdated(false)
@@ -63,6 +65,7 @@ const EditProfile = (props) => {
             axios.put(`/${props.user._id}`, editUser).then(res => {
                 console.log(res)
                 setuserUpdated(true)
+                onFetchUser();
             }).catch(err => {
                 console.log(err)
                 setuserUpdated(false)
@@ -158,5 +161,10 @@ const mapStateToProps = state => {
         loading: state.user.loading,
     };
 };
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchUser: () => dispatch(actions.fetchUser())
+    };
+};
 
-export default connect(mapStateToProps)(EditProfile)
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)

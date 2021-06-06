@@ -84,7 +84,7 @@
     display: block;
     position: absolute;
     margin-left: -8rem;
-    min-height: 6rem;
+    /* min-height: 6rem; */
     border-radius: 0.7rem;
     /* padding-top: 1rem;
     padding-left: 0.5rem;

@@ -15,7 +15,6 @@ const Feed = (props) => {
     const [adminPosts, setadminPosts] = useState([])
     const [isFetching, setIsFetching] = useState(false);
     const [verify, setverify] = useState(false)
-    const [postLength, setpostLength] = useState(1)
     const [page, setPage] = useState(1);
     const [adminPage, setadminPage] = useState(1)
     const [isAdmin, setisAdmin] = useState(false)
@@ -36,6 +35,8 @@ const Feed = (props) => {
             setIsFetching(false)
             setPage(1)
             setadminPage(1)
+            setadminView(false)
+            setisAdmin(false)
             setadminPosts([])
             setpostLoader(false)
             setupdatedPost(false)
@@ -50,7 +51,7 @@ const Feed = (props) => {
 
             return;
         }
-        setIsFetching(postLength && true);
+        setIsFetching(true);
         console.log(isFetching);
     };
 
@@ -60,7 +61,6 @@ const Feed = (props) => {
             console.log(res)
             setpostLoader(false)
             setPage(page + 1)
-            setpostLength(res.data.length)
             setposts(() => {
                 return [...posts, ...res.data]
             })

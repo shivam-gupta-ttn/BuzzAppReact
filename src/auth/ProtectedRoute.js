@@ -18,12 +18,12 @@ function ProtectedRoute({ component: Component, ...rest }) {
         }).catch(err => {
             setisAuthenticated(false)
         })
-        return()=>{
+        return () => {
             console.log("...")
         }
     }, [])
     if (isAuthenticated === null) {
-        return <Spinner/>;
+        return <Spinner />;
     }
     console.log("protected")
     return (

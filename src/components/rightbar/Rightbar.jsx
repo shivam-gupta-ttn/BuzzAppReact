@@ -2,8 +2,6 @@ import "./rightbar.css"
 import SearchIcon from '@material-ui/icons/Search';
 import { useEffect, useState } from "react";
 import axios from "../../axios-users";
-import { updateObject } from "../../shared/utility"
-import { Link } from "react-router-dom";
 import Suggestion from "./suggestion/Suggestion";
 import FriendList from "./friendList/FriendList";
 
@@ -28,6 +26,13 @@ export default function Rightbar() {
         }).catch(err => {
             console.log(err)
         })
+        return () => {
+            setfriends([])
+            setshowFriends({
+                type: true,
+                data: null
+            })
+        }
     }, [])
     let friendList = [];
     for (let key in friends) {
@@ -50,6 +55,13 @@ export default function Rightbar() {
         }).catch(err => {
             console.log(err)
         })
+        return () => {
+            setsuggestions([])
+            setshowSuggestions({
+                type: true,
+                data: null
+            })
+        }
     }, [])
 
     let suggestedFriends = [];

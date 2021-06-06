@@ -40,8 +40,8 @@ export default function Post(props) {
             setdeleted(false)
             setflagged(false)
             setpostedBy({
-                name:"",
-                profilePicture:""
+                name: "",
+                profilePicture: ""
             })
             props.updatedPost(false)
         }
@@ -112,7 +112,7 @@ export default function Post(props) {
     }
     let deletedPost = deleted ? <span><Spinner />Deleting...</span> : null
     let comment = comments.map((e, i) => (<Comment key={i} data={e} />))
-    let flaggedPost = flagged? <span><Spinner/>Post Flagged</span> : null
+    let flaggedPost = flagged ? <span><Spinner />Post Flagged</span> : null
 
     return (
         <div className="post">
