@@ -17,10 +17,10 @@ export default function Share({ data, updatedPost }) {
     const inputChangeHandler = (event) => {
         setsharePost(prevState => ({ ...prevState, ["desc"]: event.target.value }))
     }
+
     useEffect(() => {
         if (sharePost.imgId === "") return;
         axios.post(`/post`, sharePost).then(res => {
-            console.log(res)
             setloading(false)
 
             if (res.status == 200) {
@@ -40,7 +40,6 @@ export default function Share({ data, updatedPost }) {
         setloading(true)
         if (shareImage == "") {
             axios.post(`/post`, sharePost).then(res => {
-                console.log(res)
                 setloading(false)
                 if (res.status == 200) {
                     updatedPost(true)
@@ -62,16 +61,16 @@ export default function Share({ data, updatedPost }) {
                 setloading(false)
                 if (res.status == 200) {
                     updatedPost(true)
-
                     setsharePost(prevState => ({ ...prevState, ["imgId"]: res.data.url }))
-                    console.log("successfully uploaded")
                 }
             }).catch(err => {
                 console.log(err)
             })
         }
     }
+
     const Loader = loading ? <Spinner /> : null
+
     return (
         <div className="share">
             <div className="shareWrapper">
@@ -91,12 +90,9 @@ export default function Share({ data, updatedPost }) {
                     <div className="shareOptions">
                         <div className="shareOption">
                             <label htmlFor="file-input">
-
                                 <PermMedia htmlColor="tomato" className="shareIcon" />
                                 <span className="shareOptionText">Photo or Video</span>
-
                             </label>
-
                             <input type="file" name="" id="file-input" onChange={(event) => {
                                 setshareImage(event.target.files[0]);
                             }} />

@@ -9,7 +9,6 @@ import axiosImg from 'axios';
 import * as actions from "../../store/actions/index";
 
 const EditProfile = (props) => {
-    console.log(props)
     const [userUpdated, setuserUpdated] = useState(false)
     const [profileImg, setprofileImg] = useState("")
     const [editUser, seteditUser] = useState({
@@ -24,6 +23,7 @@ const EditProfile = (props) => {
         profilePicture: "",
         birthday: ""
     })
+
     const { onFetchUser } = props
     useEffect(() => {
         seteditUser({
@@ -43,18 +43,16 @@ const EditProfile = (props) => {
     const onChangeHandler = (e, event) => {
         seteditUser({ ...editUser, [event]: e.target.value })
         setuserUpdated(false)
-        console.log(editUser)
     }
+
     useEffect(() => {
         if (profileImg == "") return;
         axios.put(`/${props.user._id}`, editUser).then(res => {
-            console.log(res)
             setuserUpdated(true)
             setprofileImg("")
             onFetchUser();
         }).catch(err => {
             console.log(err)
-            setuserUpdated(false)
             setprofileImg("")
         })
     }, [editUser.profilePicture])
@@ -63,12 +61,10 @@ const EditProfile = (props) => {
         event.preventDefault();
         if (profileImg == "") {
             axios.put(`/${props.user._id}`, editUser).then(res => {
-                console.log(res)
                 setuserUpdated(true)
                 onFetchUser();
             }).catch(err => {
                 console.log(err)
-                setuserUpdated(false)
             })
         } else {
             const formData = new FormData()
@@ -77,13 +73,13 @@ const EditProfile = (props) => {
             await axiosImg.post("https://api.cloudinary.com/v1_1/drkob5xsz/image/upload", formData).then(res => {
                 if (res.status == 200) {
                     seteditUser(prevState => ({ ...prevState, ["profilePicture"]: res.data.url }))
-                    console.log("successfully uploaded")
                 }
             }).catch(err => {
                 console.log(err)
             })
         }
     }
+
     const updated = userUpdated ? <div className="done"> <DoneIcon /> Succesfully updated!! </div> : null
 
     return (
@@ -92,7 +88,6 @@ const EditProfile = (props) => {
                 <div className="editProfileWrapper">
                     <div className="editProfileBanner">
                     </div>
-
                     <div className="editProfileInfo">
                         <img src={props.user && props.user.profilePicture || ""} alt="" />
                         <label htmlFor="file-input" className="editProfileImgLabel">
@@ -155,12 +150,14 @@ const EditProfile = (props) => {
         </>
     )
 }
+
 const mapStateToProps = state => {
     return {
         user: state.user.user,
         loading: state.user.loading,
     };
 };
+
 const mapDispatchToProps = dispatch => {
     return {
         onFetchUser: () => dispatch(actions.fetchUser())

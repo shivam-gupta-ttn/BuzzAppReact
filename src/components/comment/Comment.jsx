@@ -14,8 +14,11 @@ export default function Comment({ data }) {
                 name: data.data.name,
                 profilePicture: data.data.profilePicture
             })
+        }).catch(err => {
+            console.log(err)
         })
     }, [])
+    
     return (
         <div className="comments">
             <div className="commentWrapper">

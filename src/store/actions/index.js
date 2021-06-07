@@ -1,4 +1,4 @@
 export {
-    fetchUser
+    fetchUser,
 } from './user';
 

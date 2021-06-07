@@ -1,15 +1,17 @@
 import "./topbar.css"
-import { Person, Chat, Notifications } from '@material-ui/icons';
+import { Chat, Notifications } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Notification from "./notification/Notification";
 import logo from "../../assets/tothenew.png"
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
+
+
 const Topbar = (props) => {
+
     const [showNotification, setshowNotification] = useState(false)
     const [ids, setids] = useState([])
-    console.log(props.user)
 
     useEffect(() => {
         setids(props.user?.friendRequests?.incoming)
@@ -21,11 +23,14 @@ const Topbar = (props) => {
     }
 
     let friendRequests = ids?.map((e, i) => (<Notification key={i} userId={e} onResponse={setshowNotification} />))
-    console.log(showNotification)
     const dropdown = showNotification ? <div className="dropdown-content">
         {friendRequests}
     </div> : null
-    //send friend request array on map to notification as props and there find that user
+
+    let notificationCount =
+        props.user?.friendRequests?.incoming.length ? <span className="topbarIconBadge">{props.user && props.user?.friendRequests?.incoming.length || ""}</span>
+            : null
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -46,7 +51,7 @@ const Topbar = (props) => {
                             <Notifications className="dropbtn" onClick={onNotificationClickHandler} />
                             {dropdown}
                         </div>
-                        <span className="topbarIconBadge">{props.user && props.user?.friendRequests?.incoming.length || ""}</span>
+                        {notificationCount}
                     </div>
                     <div className="topbarIconItem">
                         <Chat />

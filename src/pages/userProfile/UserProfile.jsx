@@ -26,7 +26,6 @@ const UserProfile = (props) => {
 
     useEffect(() => {
         axios.get(`/${id}`).then(data => {
-            console.log(data.data)
             setuserInfo({
                 name: data.data.name,
                 designation: data.data.designation,
@@ -47,18 +46,18 @@ const UserProfile = (props) => {
             console.log(err)
         })
     }, [id])
+
     const onAddFriendHandler = () => {
         axios.put(`/${id}/addfriend`).then(data => {
             setadded(true)
-            console.log(data)
         }).catch(err => {
             console.log(err)
         })
     }
+
     const onRemoveFriendHandler = () => {
         axios.put(`/${id}/removefriend`).then(data => {
             setremoved(true)
-            console.log(data)
         }).catch(err => {
             console.log(err)
         })
@@ -78,7 +77,6 @@ const UserProfile = (props) => {
         <span>Friend Request Sent !!</span>
     </button> : friendButton
 
-
     const cityli = userInfo.city ?
         <li className="userDetailsItem">{userInfo.city}</li> : null
 
@@ -91,16 +89,12 @@ const UserProfile = (props) => {
     const desig = userInfo.designation ?
         <p>{userInfo.designation}</p> : null
 
-    // const userPosts = props.user?.friends.includes(id) ? <div className="userPosts">
-
-    // </div> : null
 
     return (
         <>
             <div className="userContainer">
                 <div className="userProfile">
                     <div className="userBanner">
-
                     </div>
                     <div className="userProfileInfo">
                         <img src={userInfo.profilePicture} alt="" />
@@ -123,7 +117,6 @@ const UserProfile = (props) => {
                             </span>
                         </button>
                     </div>
-
                 </div>
 
                 <div className="suggestions">
@@ -133,10 +126,12 @@ const UserProfile = (props) => {
         </>
     )
 }
+
 const mapStateToProps = state => {
     return {
         user: state.user.user,
         loading: state.user.loading,
     };
 }
+
 export default connect(mapStateToProps)(UserProfile)

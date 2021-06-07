@@ -21,9 +21,6 @@ export const fetchUserStart = () => {
     };
 };
 
-
-
-
 export const fetchUser = () => {
     return dispatch => {
         axios.get('/currentuser')

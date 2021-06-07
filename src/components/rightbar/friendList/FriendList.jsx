@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 
 export default function FriendList({ friendList }) {
 
-    console.log(friendList)
-
-
     return (
         <li className="suggestionUser" key={friendList.id}>
             <img src={friendList.profilePicture} />

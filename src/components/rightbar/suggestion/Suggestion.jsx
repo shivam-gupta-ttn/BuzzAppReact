@@ -11,7 +11,6 @@ export default function Suggestion({ suggestedUser }) {
     const onAddFriendHandler = (id) => {
         axios.put(`/${id}/addfriend`).then(data => {
             setreqSent(true)
-            console.log(data)
         }).catch(err => {
             console.log(err)
         })

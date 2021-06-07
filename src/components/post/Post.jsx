@@ -1,5 +1,4 @@
 import "./post.css"
-// import { MoreVert } from "@material-ui/icons"
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
@@ -11,29 +10,31 @@ import axios from "../../axios-users";
 import axiosPost from "../../axios-posts"
 import Comment from "../comment/Comment";
 import moment from "moment"
-
 import { Image } from 'cloudinary-react'
 import Spinner from "../UI/spinner/Spinner";
 
 export default function Post(props) {
+
     const [postedBy, setpostedBy] = useState({
         name: "",
         profilePicture: ""
     })
+
     const [addComment, setaddComment] = useState({
         value: ""
     })
+
     const [deleted, setdeleted] = useState(false)
     const [like, setlike] = useState(props.data.likes.length)
     const [dislike, setdislike] = useState(props.data.dislikes.length)
     const [comments, setcomments] = useState([])
     const [flagged, setflagged] = useState(false)
+
     useEffect(() => {
-        axios.get(`${props.data.userId}`).then(data => {
+        axios.get(`/${props.data.userId}`).then(data => {
             setpostedBy({
                 name: data.data.name,
-                profilePicture: data.data.profilePicture
-
+                profilePicture: data.data.profilePicture,
             })
         })
         return () => {
@@ -56,9 +57,10 @@ export default function Post(props) {
             }
 
         }).catch(err => {
-            console.log(err)
+            console.log("post is disliked by you!!")
         })
     }
+
     const onDislikeHandler = (id) => {
         axiosPost.put(`/${id}/dislike`).then(res => {
             if (res.status == 201) {
@@ -68,37 +70,37 @@ export default function Post(props) {
                 setdislike(dislike - 1)
             }
         }).catch(err => {
-            console.log(err)
+            console.log("post is liked by you!!")
         })
     }
+
     const onFlagHandler = (id) => {
         setflagged(true)
         axiosPost.put(`/${id}/flag`).then(res => {
             setflagged(false)
-        }).catch(err => {
-            console.log(err)
         })
     }
+
     const onDeleteHandler = (id) => {
+        if (props.data.userId !== props.userId) return;
         setdeleted(true)
         axiosPost.delete(`/${id}`).then(res => {
             setdeleted(false)
             props.updatedPost(true)
         }).catch(err => {
-            console.log(err)
+            console.log("You can only delete you posts!!", err)
             props.updatedPost(true)
             setdeleted(false)
-
         })
     }
 
     const inputChangeHandler = ({ target }) => {
         setaddComment({ value: target.value })
-
     }
+
     const onCommentHandler = (id) => {
+        if (!addComment.value) return;
         axiosPost.put(`/${id}/comment`, addComment).then(data => {
-            console.log(data)
             if (data.status == 200) {
                 props.updatedPost(true)
                 setaddComment({ value: "" })
@@ -107,9 +109,11 @@ export default function Post(props) {
             console.log(err)
         })
     }
+
     const showCommentHandler = (data) => {
         setcomments(data.comments)
     }
+
     let deletedPost = deleted ? <span><Spinner />Deleting...</span> : null
     let comment = comments.map((e, i) => (<Comment key={i} data={e} />))
     let flaggedPost = flagged ? <span><Spinner />Post Flagged</span> : null
@@ -123,12 +127,15 @@ export default function Post(props) {
                         <span className="postUsername">{postedBy.name}</span>
                         <span className="postDate">{props && moment(props.data?.createdAt).fromNow() || ""}</span>
                     </div>
+
                     <div className="postTopRight">
                         <FlagIcon onClick={() => onFlagHandler(props.data._id)} /><DeleteIcon onClick={() => onDeleteHandler(props.data._id)} />
                         {deletedPost}
                         {flaggedPost}
                     </div>
+
                 </div>
+
                 <div className="postCenter">
                     <p className="postText">
                         {props && props.data.desc || ""}
@@ -136,6 +143,7 @@ export default function Post(props) {
                     <Image className="postCenterImg" cloudName="drkob5xsz" publicId={props && props.data.imgId || ""} />
 
                 </div>
+
                 <div className="postBottom">
                     <div className="postBottomLeft">
                         <ThumbUpAltIcon className="likeIcon" onClick={() => onLikeHandler(props.data._id)} />
@@ -144,10 +152,12 @@ export default function Post(props) {
                         <span className="dislikeCounter">{dislike}</span>
 
                     </div>
+
                     <div className="postBottomRight">
                         <InsertCommentIcon className="postCommentIcon" onClick={() => showCommentHandler(props.data)} />
                     </div>
                 </div>
+
                 <div className="comment">
                     <input
                         className="commentInput"
@@ -156,8 +166,9 @@ export default function Post(props) {
                         value={addComment.value}
                         required
                     />
-                    <SendIcon onClick={() => onCommentHandler(props.data._id)} />
+                    <SendIcon className="postCommentIconSend" onClick={() => onCommentHandler(props.data._id)} />
                 </div>
+
                 {comment}
             </div>
         </div>

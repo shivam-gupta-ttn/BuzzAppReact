@@ -3,7 +3,6 @@ import "./flagged.css"
 import axios from "../../../axios-users"
 
 export default function Flagged(props) {
-    console.log(props)
     const [flagUser, setflagUser] = useState({})
 
     useEffect(() => {

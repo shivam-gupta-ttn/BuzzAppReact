@@ -10,27 +10,22 @@ function ProtectedRoute({ component: Component, ...rest }) {
 
         axios.get("http://localhost:5500/api/auth/check").then(data => {
             if (data.status === 200) {
-                // console.log(data)
                 setisAuthenticated(true)
             } else {
                 setisAuthenticated(false)
             }
         }).catch(err => {
+            console.log(err)
             setisAuthenticated(false)
         })
-        return () => {
-            console.log("...")
-        }
     }, [])
     if (isAuthenticated === null) {
         return <Spinner />;
     }
-    console.log("protected")
     return (
         <Route {...rest} render={props => isAuthenticated ? (
             <Component {...props} />
         ) : <Redirect to="/login" />} />
     )
 }
-
 export default ProtectedRoute

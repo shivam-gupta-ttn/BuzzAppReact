@@ -6,6 +6,7 @@ import * as actions from "../../../store/actions/index"
 import { connect } from "react-redux"
 
 const Notification = (props) => {
+    
     const [notificationUser, setnotificationUser] = useState({
         name: "",
     })
@@ -13,6 +14,7 @@ const Notification = (props) => {
     const [rejected, setrejected] = useState(false)
 
     const { onFetchUser } = props
+
     useEffect(() => {
         axios.get(`/${props.userId}`).then(data => {
             setnotificationUser({
@@ -22,17 +24,18 @@ const Notification = (props) => {
             console.log(err)
         })
     }, [])
+
     const onAcceptHandler = () => {
         setaccepted(true)
         axios.put(`/${props.userId}/accept`).then(res => {
             setaccepted(false)
             props.onResponse(false)
             onFetchUser();
-            console.log(res)
         }).catch(err => {
             console.log(err)
         })
     }
+
     const accept = accepted ? <div className="accepted"><Spinner />Friend Request Accepted</div> : null
 
     const onRejectHandler = () => {
@@ -40,15 +43,13 @@ const Notification = (props) => {
         axios.put(`/${props.userId}/reject`).then(res => {
             setrejected(false)
             props.onResponse(false)
-            console.log(res)
         }).catch(err => {
             console.log(err)
         })
     }
+
     const reject = rejected ? <div className="rejeted"><Spinner />Friend Request Rejected</div> : null
 
-    //get user on useEffect
-    //perform accept reject functionalities
     return (
         <>
             <div className="notificationWrapper">
@@ -64,12 +65,14 @@ const Notification = (props) => {
         </>
     )
 }
+
 const mapStateToProps = state => {
     return {
         user: state.user.user,
         loading: state.user.loading,
     };
 };
+
 const mapDispatchToProps = dispatch => {
     return {
         onFetchUser: () => dispatch(actions.fetchUser())

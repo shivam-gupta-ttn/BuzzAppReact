@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 
 
 const Leftbar = (props) => {
-    // console.log("leftbar",props.user)
+
     return (
         <div className="leftbar">
             <div className="leftbarWrapper">
                 <div className="leftbarCard">
                     <div className="banner">
                     </div>
+
                     <ul className="profileInfo">
                         <li className="profileInfoItem">
                             <img src={props.user && props.user.profilePicture || ""} alt="" />
@@ -21,8 +22,8 @@ const Leftbar = (props) => {
                         <li className="profileInfoItem">
                             <p>Designation : {props.user && props.user.designation || ""}</p>
                         </li>
-
                     </ul>
+
                     <ul className="userInfo">
                         <li className="userInfoItem">
                             <h4>{props.user && props.user.friends?.length || "0"}</h4>
@@ -39,8 +40,8 @@ const Leftbar = (props) => {
                             <span>Website</span>
                         </li>
                     </ul>
-                </div>
 
+                </div>
 
                 <div className="leftbarListWrapper">
                     <ul className="leftbarList">
@@ -61,8 +62,8 @@ const Leftbar = (props) => {
                             <ExpandMore className="leftbarIcon colored" />
                             <span className="leftbarListItemText colored">Show more</span>
                         </li>
-
                     </ul>
+
                     <ul className="leftbarList">
                         <h4>Related</h4>
                         <li className="leftbarListItem">
@@ -82,6 +83,7 @@ const Leftbar = (props) => {
                             <span className="leftbarListItemText colored">Show more</span>
                         </li>
                     </ul>
+
                     <ul className="leftbarList">
                         <h4>Find</h4>
                         <li className="leftbarListItem">
@@ -101,6 +103,7 @@ const Leftbar = (props) => {
                             <span className="leftbarListItemText colored">Show more</span>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </div>

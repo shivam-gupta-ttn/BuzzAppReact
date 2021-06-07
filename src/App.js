@@ -13,7 +13,6 @@ const App = (props) => {
   const { onFetchUser } = props;
 
   useEffect(() => {
-    console.log(props.user)
     onFetchUser();
 
   }, [onFetchUser])
@@ -30,21 +29,16 @@ const App = (props) => {
     </>
   )
 
-
   return (
     <>
-
-
       <Switch>
         <Route path="/login" component={Login} exact />
         <Route component={otherRoutes} />
-        {/* <ProtectedRoute path="/userprofile/:id" component={UserProfile} />
-        <ProtectedRoute path="/editprofile" component={EditProfile} exact />
-        <Redirect to="/" /> */}
       </Switch>
     </>
   );
 }
+
 const mapStateToProps = state => {
   return {
     user: state.user.user,
@@ -57,4 +51,5 @@ const mapDispatchToProps = dispatch => {
     onFetchUser: () => dispatch(actions.fetchUser())
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);

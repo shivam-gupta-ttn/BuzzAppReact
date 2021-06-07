@@ -39,27 +39,11 @@ export default function AdminPost(props) {
         })
     }, [])
 
-    const onLikeHandler = (id) => {
-        axiosPost.put(`/${id}/like`).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-    const onDislikeHandler = (id) => {
-        axiosPost.put(`/${id}/dislike`).then(res => {
-            console.log(res)
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
     const onDeleteHandler = (id) => {
         setdeleted(true)
         axiosPost.delete(`/${id}`).then(res => {
             setdeleted(false)
             props.updatedPost(true)
-            console.log(res)
         }).catch(err => {
             console.log(err)
         })
@@ -74,16 +58,18 @@ export default function AdminPost(props) {
         setflagId(data.flagged)
 
     }
+    
     const onCommentHandler = (id) => {
         axiosPost.put(`/${id}/comment`, addComment).then(data => {
-            console.log(data)
             if (data.status == 200) {
                 setaddComment({ value: "" })
+                props.updatedPost(true)
             }
         }).catch(err => {
             console.log(err)
         })
     }
+
     const showCommentHandler = (data) => {
         setcomments(data.comments)
     }
@@ -119,9 +105,9 @@ export default function AdminPost(props) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <ThumbUpAltIcon className="likeIcon" onClick={() => onLikeHandler(props.data._id)} />
+                        <ThumbUpAltIcon className="likeIcon" />
                         <span className="likeCounter">{props && props.data?.likes?.length || ""}</span>
-                        <ThumbDownAltIcon className="dislikeIcon" onClick={() => onDislikeHandler(props.data._id)} />
+                        <ThumbDownAltIcon className="dislikeIcon" />
                         <span className="dislikeCounter">{props && props.data?.dislikes?.length || ""}</span>
 
                     </div>
@@ -137,7 +123,7 @@ export default function AdminPost(props) {
                         value={addComment.value}
                         required
                     />
-                    <SendIcon onClick={() => onCommentHandler(props.data._id)} />
+                    <SendIcon className="postCommentIconSend" onClick={() => onCommentHandler(props.data._id)} />
                 </div>
                 {comment}
             </div>

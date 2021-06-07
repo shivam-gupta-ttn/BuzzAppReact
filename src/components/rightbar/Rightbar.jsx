@@ -7,6 +7,7 @@ import FriendList from "./friendList/FriendList";
 
 
 export default function Rightbar() {
+
     const [friends, setfriends] = useState([])
     const [suggestions, setsuggestions] = useState([])
     const [showSuggestions, setshowSuggestions] = useState({
@@ -17,10 +18,10 @@ export default function Rightbar() {
         type: true,
         data: null
     })
+
     //friends logic
     useEffect(() => {
         axios.get("/friends/all").then(data => {
-            console.log(data.data)
             setfriends(data.data)
 
         }).catch(err => {
@@ -34,7 +35,9 @@ export default function Rightbar() {
             })
         }
     }, [])
+
     let friendList = [];
+
     for (let key in friends) {
         friendList.push({
             name: friends[key].name,
@@ -46,10 +49,10 @@ export default function Rightbar() {
     let friend = friendList.map((e, i) => (
         <FriendList friendList={e} key={i} />
     ))
+
     // suggestions logic  
     useEffect(() => {
         axios.get("/suggestions/all").then(data => {
-            console.log(data.data)
             setsuggestions(data.data)
 
         }).catch(err => {
@@ -65,6 +68,7 @@ export default function Rightbar() {
     }, [])
 
     let suggestedFriends = [];
+
     for (let key in suggestions) {
         suggestedFriends.push({
             name: suggestions[key].name,
@@ -73,6 +77,7 @@ export default function Rightbar() {
             email: suggestions[key].email
         });
     }
+
     let suggestedFriend = suggestedFriends.map((e, i) => (
         <Suggestion suggestedUser={e} key={i} />
     ))
@@ -85,7 +90,6 @@ export default function Rightbar() {
                 data: false
             })
             const searchedFriend = friendList.find((e) => e.name?.toLowerCase() == event.target.value || e.email?.toLowerCase() == event.target.value)
-            console.log(searchedFriend)
             setshowFriends((p) => ({ ...p, data: searchedFriend ? searchedFriend : "no user found" }))
         } else {
             setshowFriends({
@@ -94,6 +98,7 @@ export default function Rightbar() {
             })
         }
     }
+
     //searching logic by name and email suggestion
     const filterOnChangeSuggestion = (event) => {
         if (event.target.value) {
@@ -102,7 +107,6 @@ export default function Rightbar() {
                 data: false
             })
             const searchedSuggestedFriend = suggestedFriends.find((e) => e.name?.toLowerCase() == event.target.value || e.email?.toLowerCase() == event.target.value)
-            console.log(searchedSuggestedFriend)
             setshowSuggestions((p) => ({ ...p, data: searchedSuggestedFriend ? searchedSuggestedFriend : "no user found" }))
         } else {
             setshowSuggestions({
@@ -123,15 +127,15 @@ export default function Rightbar() {
                     </span>
                     {showFriends.type ? friend : <FriendList friendList={showFriends.data} />}
                 </ul>
+
                 <ul className="suggestionList">
                     <span className="suggestionListItem"> <h5>Suggestions</h5>
                         <input type="text" placeholder="Search..." onChange={filterOnChangeSuggestion} />
                         <label htmlFor="search"><SearchIcon className="rightbarIcon" /></label>
                     </span>
                     {showSuggestions.type ? suggestedFriend : <Suggestion suggestedUser={showSuggestions.data} />}
-
-
                 </ul>
+
             </div>
         </div>
     )
